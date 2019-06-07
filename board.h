@@ -8,7 +8,7 @@
 /** State of Each NUmber **/
 /** 0: Empty Space, 1: Wall, 2: Box **/
 /** 3: Destination, 4: OuyBound, 5: Character **/
-/** 10: Destination That completed **/
+/** 9: Destination That completed **/
 
 
 class Player{
