@@ -11,6 +11,7 @@
 /** 9: Destination That completed **/
 
 
+
 class Player{
 public:
     int r, c;
@@ -53,6 +54,8 @@ public:
 
     void make_board(int arr[MAX_ROW][MAX_COL]); //Creating Game Board using 2 Dimensional Integer Array
 
+
+    void print_board_console();
     void print_board(); // Print Game Board's status. It's Needless to NCurses.
 
 

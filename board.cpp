@@ -7,7 +7,7 @@ using namespace std;
 /** State of Each NUmber **/
 /** 0: Empty Space, 1: Wall, 2: Box **/
 /** 3: Destination, 4: OuyBound, 5: Character **/
-/** 9: Destination That completed **/
+
 
 
 Board::Board() {
@@ -38,47 +38,54 @@ void Board::make_board(int (*arr)[10]) {
 }
 
 void Board::print_board() {
-    printw("\n======= map =======\n");
+    mvprintw(1, 1, "======= map =======\n");
 
     for (int i = 0; i < MAX_ROW; i ++) {
 
         for (int j = 0; j < MAX_COL; j ++) {
             if (player.r == i && player.c == j) {
                 attron(COLOR_PAIR(2));
-                printw("5 ");
+                mvprintw(i + 2, j * 2 + 1, "@@");
                 attroff(COLOR_PAIR(2));
             }
             else {
                 if(board[i][j] == 1) {
-                  attron(COLOR_PAIR(3));
-                  printw("%d ", board[i][j]);
-                  attroff(COLOR_PAIR(3));
+                    attron(COLOR_PAIR(3));
+                    mvprintw(i + 2, j * 2 + 1, "%d ", board[i][j]);
+                    attroff(COLOR_PAIR(3));
                 }
-                else if(board[i][j] == 2) {
-                  attron(COLOR_PAIR(4));
-                  printw("%d ", board[i][j]);
-                  attroff(COLOR_PAIR(4));
+                else if(board[i][j] == 2 || board[i][j] == 9) {
+                    attron(COLOR_PAIR(4));
+                    mvprintw(i + 2, j * 2 + 1, "%d ", board[i][j]);
+                    attroff(COLOR_PAIR(4));
                 }
                 else if(board[i][j] == 3) {
-                  attron(COLOR_PAIR(5));
-                  printw("%d ", board[i][j]);
-                  attroff(COLOR_PAIR(5));
+                    attron(COLOR_PAIR(5));
+                    mvprintw(i + 2, j * 2 + 1, "%d ", board[i][j]);
+                    attroff(COLOR_PAIR(5));
                 }
-                else if(board[i][j] == 9) {
-                  attron(COLOR_PAIR(6));
-                  printw("%d ", board[i][j]);
-                  attroff(COLOR_PAIR(6));
+                else if(board[i][j] == 4) {
+                    attron(COLOR_PAIR(6));
+                    mvprintw(i + 2, j * 2 + 1, "%d ", board[i][j]);
+                    attroff(COLOR_PAIR(6));
                 } else
-                  printw("%d ", board[i][j]);
+                    mvprintw(i + 2, j * 2 + 1, "  ", board[i][j]);
             }
         }
-        printw("\n");
 
     }
-    printw("-------------------\n");
-    printw("Player Moved : %d || Box Moved : %d\n", player_move, box_move);
+    printw("\n-------------------\n");
+    printw("\n Player Moved : %d || Box Moved : %d\n", player_move, box_move);
 
     printw("===================\n");
+
+    mvprintw(21, 1, "[white: Player, red: Wall, yello: Box, blue: Destination]");
+    mvprintw(22, 1, "[UP: w, LEFT: a, DOWN: s, RIGHT: d, QUIT: q, RESET: r]");
+
+    attron(COLOR_PAIR(1));
+    border('*', '*', '*', '*', '*', '*', '*', '*');
+    attroff(COLOR_PAIR(1));
+
     refresh();
 }
 
